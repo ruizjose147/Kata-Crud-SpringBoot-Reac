@@ -2,7 +2,8 @@ import React, {createContext, useContext, useReducer, useEffect, useRef, useStat
 
 const HOST_API = "http://localhost:8080/api"
 const initialState = {
-  list: []
+  list: [],
+  item: {}
 };
 const Store = createContext(initialState)
 
@@ -61,7 +62,7 @@ const Form = () => {
 
   //revizar aqui
   return <form ref={formRef}>
-    <input type="text" name='name' defaultValue={item.name} onChange={(event) =>{
+    <input type="text" name="name" defaultValue={item.name} onChange={(event) =>{
       setState({...state, name: event.target.value})
     }} ></input>
     {item.id && <button onClick={onEdit}>Actualizar</button>}
@@ -135,7 +136,7 @@ function reduce(state, action){
       return { ...state, list: listUpdate }
     case 'update-list':
       return {...state, list: action.list }
-      case 'edit-item':
+    case 'edit-item':
       return {...state, item: action.item }
     case 'add-item':
       const newList = state.list;
